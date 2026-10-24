@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">HUMAN RESOURCES</div>
+      <h1>Employee Management</h1>
+      <p>Manage your people, all in one place.</p>
+    </div>
+    <div class="brand-mark" aria-label="Employee Management System">EMS</div>
+  </header>
+
+  <main class="container">
+    <section class="stats-grid" aria-label="Employee statistics">
+      <article class="stat-card"><span class="stat-label">Employees shown</span><strong id="totalEmployees">0</strong><span class="stat-note">Based on current list</span></article>
+      <article class="stat-card"><span class="stat-label">Departments shown</span><strong id="totalDepartments">0</strong><span class="stat-note">Unique departments</span></article>
+      <article class="stat-card"><span class="stat-label">Average salary shown</span><strong id="averageSalary">₹0</strong><span class="stat-note">Based on current list</span></article>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div><span class="eyebrow">EMPLOYEE DETAILS</span><h2 id="formTitle">Add a new employee</h2></div>
+        <span class="section-icon">＋</span>
+      </div>
+      <form id="employeeForm">
+        <input type="hidden" id="databaseId">
+        <div class="form-grid">
+          <div class="form-field"><label for="name">Full name</label><input id="name" name="name" required maxlength="100" placeholder="e.g. Neha Sharma"></div>
+          <div class="form-field"><label for="employee_id">Employee ID</label><input id="employee_id" name="employee_id" required maxlength="30" placeholder="e.g. EMP006"></div>
+          <div class="form-field"><label for="department">Department</label><input id="department" name="department" required maxlength="80" placeholder="e.g. IT"></div>
+          <div class="form-field"><label for="designation">Designation</label><input id="designation" name="designation" required maxlength="100" placeholder="e.g. Software Tester"></div>
+          <div class="form-field"><label for="salary">Salary (₹)</label><input id="salary" name="salary" type="number" min="0" step="0.01" required placeholder="e.g. 30000"></div>
+          <div class="form-field"><label for="contact">Contact number</label><input id="contact" name="contact" type="tel" required maxlength="30" placeholder="e.g. 9876501234"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="submitBtn" type="submit">Add employee <span>→</span></button>
+          <button class="btn btn-light" id="cancelBtn" type="button" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel records-panel">
+      <div class="records-heading">
+        <div><span class="eyebrow">DIRECTORY</span><h2>Employee records</h2><p>Search, edit, or remove an employee record.</p></div>
+        <label class="search-box" for="searchInput"><span>⌕</span><input id="searchInput" type="search" placeholder="Search name, ID or department…"></label>
+      </div>
+      <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Employee</th><th>Employee ID</th><th>Department</th><th>Designation</th><th>Salary</th><th>Contact</th><th>Actions</th></tr></thead>
+          <tbody id="employeeTable"><tr><td colspan="7" class="table-state">Loading employee records…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <p class="page-note">Employee Management System <span>•</span> Flask + SQLite</p>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
